@@ -41,17 +41,12 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh api -X PATCH -H "Accept: application/vnd.github+json" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            /repos/${{ github.repository }}/check-runs/${{ github.event.client_payload.checkRunId }} \
-            --input - << EOF
-            {
-              "conclusion": "success",
-              "details_url": "https://details.kenmuse.com",
-              "output": {
-                "title": "My Check Run Title 🚀",
-                "summary": "**Summary**: The run completed.",
-                "text": "Everything worked as expected. You should see a logo above."
-               }
-            }
-          EOF          
+            gh api \
+              --method PATCH \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              /repos/${{ github.repository }}/check-runs/${{ github.event.client_payload.checkRunId }} \
+             -f "name=mighty_readme" -f "started_at=2018-05-04T01:14:52Z" -f "status=completed" -f "conclusion=success" -f "completed_at=2018-05-04T01:14:52Z" -f "output[title]=Mighty Readme report" -f "output[summary]=There are 0 failures, 2 warnings, and 1 notices." -f "output[text]=You may have some misspelled words on lines 2 and 4. You also may want to add a section in your README about how to install your app." -f "output[annotations[][path]]=README.md" -f "output[annotations[][annotation_level]]=warning" -f "output[annotations[][title]]=Spell Checker" -f "output[annotations[][message]]=Check your spelling for 'banaas'." -f "output[annotations[][raw_details]]=Do you mean 'bananas' or 'banana'?" -F "output[annotations[][start_line]]=2" -F "output[annotations[][end_line]]=2" -f "output[annotations[][path]]=README.md" -f "output[annotations[][annotation_level]]=warning" -f "output[annotations[][title]]=Spell Checker" -f "output[annotations[][message]]=Check your spelling for 'aples'" -f "output[annotations[][raw_details]]=Do you mean 'apples' or 'Naples'" -F "output[annotations[][start_line]]=4" -F "output[annotations[][end_line]]=4" -f "output[images[][alt]]=Super bananas" -f "output[images[][image_url]]=http://example.com/images/42"
+
+
+             
