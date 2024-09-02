@@ -14,7 +14,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  start-check:
+  tests:
     runs-on: ubuntu-latest
     permissions:
       checks: write   # Permission to create a Check Run
@@ -35,7 +35,7 @@ jobs:
             -f name='WAT' \
             -f head_sha='${{ github.event.pull_request.head.sha }}' \
             -f status='queued' \
-            -f 'output[title]=My WAT Title' \
+            -f 'output[title]=' \
             -f 'output[summary]=A *fancy* summary' \
             -f 'output[text]=More detailed Markdown **text**' \
             --jq '.id' \
