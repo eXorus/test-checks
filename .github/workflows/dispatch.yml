@@ -40,6 +40,7 @@ jobs:
             -H "X-GitHub-Api-Version: 2022-11-28" \
             -f 'conclusion=success' \
             -f 'output[title]=WAT Report (2 failed)' \
+            -f 'output[summary]=there are 2 failed tests to check here https://codeception.cloud/organizations/openclassrooms/environments/oc-52619' \
             -f 'output[text]=|
           | **Failed test**                                               | **Domain**       | **Test Health**        |
           |---------------------------------------------------------------|------------------|------------------------|
