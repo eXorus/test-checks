@@ -44,7 +44,7 @@ jobs:
           ####################################################
           # Put the ID into a step variable
           ####################################################
-
+          echo $CHECKID
           echo "checkId=$CHECKID" >> $GITHUB_OUTPUT          
 
       - name: Repository Dispatch
