@@ -41,7 +41,7 @@ jobs:
             -f 'conclusion=success' \
             -f 'output[title]=WAT Report (2 failed)' \
             -f 'output[summary]=there are 2 failed tests to check here https://codeception.cloud/organizations/openclassrooms/environments/oc-52619' \
-            -f 'output[text]=|
+            -f 'output[text]=
           | **Failed test**                                               | **Domain**       | **Test Health**        |
           |---------------------------------------------------------------|------------------|------------------------|
           | Admin Can Retrieve All Paths By Id Backend Issue              | LearningContent  | Preprod: Passed, Staging: Failed |
