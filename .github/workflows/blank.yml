@@ -34,17 +34,11 @@ jobs:
             -H "X-GitHub-Api-Version: 2022-11-28" \
             -f name='WAT' \
             -f head_sha='${{ github.event.pull_request.head.sha }}' \
-            -f status='queued' \
-            -f 'output[title]=' \
-            -f 'output[summary]=A *fancy* summary' \
-            -f 'output[text]=More detailed Markdown **text**' \
             --jq '.id' \
             /repos/${{ github.repository }}/check-runs)
           
           ####################################################
           # Put the ID into a step variable
           ####################################################
-          echo $CHECKID
-          echo "sha/${{ github.sha }}"
-          echo "checkId=$CHECKID" >> $GITHUB_OUTPUT          
+          echo $CHECKID       
 
