@@ -40,7 +40,6 @@ jobs:
             -H "X-GitHub-Api-Version: 2022-11-28" \
             -f 'conclusion=success' \
             -f 'output[title]=WAT Report (2 failed)' \
-            -f 'output[summary]=There are 2 failed tests to check.' \
-            -f 'output[text]=here the test1 and here the second test.' \
+            -f 'output[summary]=There are 2 failed tests to check.' \-f 'output[text]=| **Failed test** \| **Domain** \| **Test Health** |\n|---------------------------\|------------------\|-----------------------------|\n| Admin Can Retrieve All Paths By Id Backend Issue \| LearningContent  \| Preprod: Passed, Staging: Failed |\n| Get Offers Backend Issue \| Product \| Preprod: Passed, Staging: Failed |\n| Admin Can See Team Analytics Overview Frontend Issue \| Analytics \| Preprod: Failed, Staging: Failed |' \
             /repos/${{ github.repository }}/check-runs/${{ github.event.client_payload.checkRunId }}  
              
