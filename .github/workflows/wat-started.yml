@@ -23,6 +23,7 @@ jobs:
           if [ -z "$CHECK_RUN_ID" ]; then
           
             echo "No check run with the name 'WAT' found."
+            echo "API Response: $RESPONSE"
             PR_HEAD_SHA=$(echo "$RESPONSE" | jq -r '.check_runs[] | select(.status != "completed") | .pull_requests[0].head.sha')
             
             if [ -z "$PR_HEAD_SHA" ]; then
