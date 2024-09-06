@@ -1,0 +1,9 @@
+name: dummy-workflow
+on:
+  pull_request
+jobs:
+  dummy-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dummy Step
+        run: echo "Dummy step started"
