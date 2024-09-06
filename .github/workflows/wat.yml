@@ -23,7 +23,7 @@ jobs:
 
   dummy-job-2:
     runs-on: ubuntu-latest
-    if: github.event_name == 'wat-started'
+    if: github.event.action == 'wat-started'
     steps:
       - name: Dummy Step 2
         env:
