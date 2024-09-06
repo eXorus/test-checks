@@ -24,8 +24,8 @@ jobs:
           
             echo "No check run with the name 'WAT' found."
             echo "API Response: $RESPONSE"
-            PR_HEAD_SHA=$(echo "$RESPONSE" | jq -r '.check_runs[] | select(.status != "completed") | .pull_requests[0].head.sha')
-            
+            PR_HEAD_SHA=$(echo "$RESPONSE" | jq -r '.check_runs[] | .pull_requests[0].head.sha')
+
             if [ -z "$PR_HEAD_SHA" ]; then
               echo "No valid PR head SHA found, cannot create a new check run."
               exit 1
