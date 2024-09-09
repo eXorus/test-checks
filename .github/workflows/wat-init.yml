@@ -1,4 +1,4 @@
-name: dummy-workflow
+name: WAT Init
 on:
   pull_request:
 jobs:
