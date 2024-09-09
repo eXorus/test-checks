@@ -1,10 +1,10 @@
-name: WAT Ended
+name: WAT
 on:
   workflow_dispatch:
 jobs:
 
 
-  dummy-job-3:
+  Ended:
     runs-on: ubuntu-latest
     steps:
       - name: Dummy Step 3
