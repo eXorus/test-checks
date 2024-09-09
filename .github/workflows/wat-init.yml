@@ -6,7 +6,7 @@ jobs:
   Init:
     runs-on: ubuntu-latest
     steps:
-      - name: Create Check Run
+      - name: Create Check Run & Call Codeception Cloud
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -18,11 +18,11 @@ jobs:
               
           PR_ID=$(echo "$RESPONSE" | jq -r '.pull_requests[0].number')
           BRANCH_NAME=$(echo "$RESPONSE" | jq -r '.pull_requests[0].head.ref')
-      - name: Call Codeception Cloud
-        run: |
+          
           curl -X POST https://codeception.cloud/api/environments \
             -H "Content-Type: application/json" \
             -d '{
               "branch_name": "'$BRANCH_NAME'",
               "pr_number": "'$PR_ID'"
             }'
+          
