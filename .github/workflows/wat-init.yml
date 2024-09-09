@@ -1,6 +1,7 @@
 name: dummy-workflow
 on:
   pull_request:
+  workflow_dispatch:
 jobs:
 
   dummy-job:
