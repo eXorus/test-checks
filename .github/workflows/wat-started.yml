@@ -1,10 +1,10 @@
-name: WAT Started
+name: WAT
 on:
   workflow_dispatch:
 jobs:
 
 
-  default:
+  Started:
     runs-on: ubuntu-latest
     steps:
       - name: Dummy Step 2
