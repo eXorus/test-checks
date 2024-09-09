@@ -18,6 +18,9 @@ jobs:
               
           PR_ID=$(echo "$RESPONSE" | jq -r '.pull_requests[0].number')
           BRANCH_NAME=$(echo "$RESPONSE" | jq -r '.pull_requests[0].head.ref')
+
+          echo $PR_ID
+          echo $BRANCH_NAME
           
           curl -X POST https://codeception.cloud/api/environments \
             -H "Content-Type: application/json" \
