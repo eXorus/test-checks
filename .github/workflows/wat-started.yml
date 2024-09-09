@@ -1,5 +1,6 @@
 name: dummy-workflow
 on:
+  workflow_dispatch:
   repository_dispatch:
     types: [wat-started]
 jobs:
