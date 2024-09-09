@@ -4,7 +4,7 @@ on:
 jobs:
 
 
-  dummy-job-2:
+  Started:
     runs-on: ubuntu-latest
     steps:
       - name: Dummy Step 2
