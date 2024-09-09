@@ -1,4 +1,4 @@
-name: dummy-workflow
+name: WAT Ended
 on:
   workflow_dispatch:
   repository_dispatch:
