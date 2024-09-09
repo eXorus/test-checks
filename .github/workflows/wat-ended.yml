@@ -1,4 +1,4 @@
-name: WAT
+name: WAT Ended
 on:
   workflow_dispatch:
 jobs:
