@@ -1,4 +1,4 @@
-name: dummy-workflow
+name: WAT Started
 on:
   workflow_dispatch:
   repository_dispatch:
