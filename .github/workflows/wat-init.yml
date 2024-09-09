@@ -1,9 +1,9 @@
-name: WAT Init
+name: WAT
 on:
   pull_request:
 jobs:
 
-  dummy-job:
+  Init:
     runs-on: ubuntu-latest
     steps:
       - name: Dummy Step
