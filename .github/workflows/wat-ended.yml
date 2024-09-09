@@ -1,8 +1,6 @@
 name: WAT Ended
 on:
   workflow_dispatch:
-  repository_dispatch:
-    types: [wat-ended]
 jobs:
 
 
