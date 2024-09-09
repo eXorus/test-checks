@@ -19,13 +19,16 @@ jobs:
           PR_ID=$(echo "$RESPONSE" | jq -r '.pull_requests[0].number')
           BRANCH_NAME=$(echo "$RESPONSE" | jq -r '.pull_requests[0].head.ref')
 
-          echo $PR_ID
-          echo $BRANCH_NAME
-          
-          curl -X POST https://codeception.cloud/api/environments \
+          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" -X POST https://codeception.cloud/api/environments \
             -H "Content-Type: application/json" \
             -d '{
               "branch_name": "'$BRANCH_NAME'",
               "pr_number": "'$PR_ID'"
-            }'
+            }')
+
+          echo "Check run created with branch $BRANCH_NAME and PR number $PR_ID (HTTP code: $HTTP_CODE)"
+
+          
+
+          
           
