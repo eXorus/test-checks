@@ -1,0 +1,60 @@
+name: WAT
+
+on:
+  workflow_dispatch:
+    inputs:
+      status:
+        description: 'Set the status of the Check Run (in_progress or completed)'
+        required: true
+        default: 'in_progress'
+
+jobs:
+  Update_Check_Run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Update or Create Check Run
+        env:
+          GH_TOKEN: ${{ github.token }}   
+        run: |
+          STATUS="${{ github.event.inputs.status }}"
+          echo "Requested status: $STATUS"
+
+          # Obtenir les check-runs existants
+          RESPONSE=$(gh api -X GET -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            /repos/${{ github.repository }}/commits/${{ github.sha }}/check-runs)
+
+          # Trouver le check run "Tests" associé au workflow "WAT" qui n'est pas complété
+          CHECK_RUN_ID=$(echo "$RESPONSE" | jq -r '.check_runs[] | select(.name == "Tests" and .check_suite.workflow_name == "WAT" and .status != "completed") | .id')
+
+          # Si aucun check run n'est trouvé, en créer un nouveau
+          if [ -z "$CHECK_RUN_ID" ]; then
+            RESPONSE=$(gh api -X POST -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              -f name='Tests' \
+              -f head_sha="${{ github.sha }}" \
+              /repos/${{ github.repository }}/check-runs)
+
+            CHECK_RUN_ID=$(echo "$RESPONSE" | jq -r '.id')
+            echo "Check run created with ID: $CHECK_RUN_ID"
+          fi
+
+          # Définir les champs à mettre à jour en fonction du statut
+          if [ "$STATUS" = "in_progress" ]; then
+            gh api -X PATCH -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              -f 'status=in_progress' \
+              /repos/${{ github.repository }}/check-runs/$CHECK_RUN_ID
+            echo "Check run updated to in_progress with ID: $CHECK_RUN_ID"
+          elif [ "$STATUS" = "completed" ]; then
+            gh api -X PATCH -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              -f 'status=completed' \
+              -f 'conclusion=success' \
+              /repos/${{ github.repository }}/check-runs/$CHECK_RUN_ID
+            echo "Check run updated to completed with ID: $CHECK_RUN_ID"
+          else
+            echo "Invalid status: $STATUS"
+            exit 1
+          fi
