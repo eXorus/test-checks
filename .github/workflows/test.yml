@@ -25,5 +25,7 @@ jobs:
           gh api -X PATCH -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
             -f 'conclusion=action_required' \
+            -f 'details_url=http://codeception.cloud.test/organizations/openclassrooms/environments/oc-52517' \
+            -f 'external_id=508171' \
             /repos/${{ github.repository }}/check-runs/$CHECK_RUN_ID 
 
