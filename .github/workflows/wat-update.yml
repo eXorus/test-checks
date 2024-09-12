@@ -38,6 +38,7 @@ jobs:
           echo "Requested status: $STATUS"
           
           CONCLUSION="${{ github.event.inputs.conclusion }}"
+          echo "Requested status: $CONCLUSION"
           TITLE="${{ github.event.inputs.title }}"
           SUMMARY="${{ github.event.inputs.summary }}"
           TEXT="${{ github.event.inputs.text }}"
