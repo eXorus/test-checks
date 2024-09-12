@@ -81,7 +81,7 @@ jobs:
 
 
             TEMP_JSON=$(mktemp)
-            cat <<EOF > $TEMP_JSON
+            cat <<-EOF > $TEMP_JSON
             {
               "status": "completed",
               "conclusion": "$CONCLUSION",
