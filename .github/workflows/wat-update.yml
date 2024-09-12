@@ -87,7 +87,7 @@ jobs:
             gh api -X PATCH -H "Accept: application/vnd.github+json" \
               -H "X-GitHub-Api-Version: 2022-11-28" \
               -f 'status=completed' \
-              -f 'conclusion="$CONCLUSION"' \
+              -f "conclusion=$CONCLUSION" \
               -f 'output[title]=$TITLE' \
               -f 'output[summary]=$SUMMARY' \
               -f 'output[text]=$TEXT' \
