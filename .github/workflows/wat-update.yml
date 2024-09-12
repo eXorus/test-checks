@@ -6,7 +6,24 @@ on:
       status:
         description: 'Set the status of the Check Run (in_progress or completed)'
         required: true
-        default: 'in_progress'
+      conclusion:
+        description: 'Conclusion of the check run (success or action_required)'
+        required: false
+      title:
+        description: 'Title for the output'
+        required: false
+      summary:
+        description: 'Summary for the output'
+        required: false
+      text:
+        description: 'Detailed text for the output'
+        required: false
+      started_at:
+        description: 'Start time of the check run (ISO 8601 format)'
+        required: false
+      completed_at:
+        description: 'Completion time of the check run (ISO 8601 format)'
+        required: false
 
 jobs:
   Update_Check_Run:
@@ -19,6 +36,13 @@ jobs:
         run: |
           STATUS="${{ github.event.inputs.status }}"
           echo "Requested status: $STATUS"
+          
+          CONCLUSION="${{ github.event.inputs.conclusion }}"
+          TITLE="${{ github.event.inputs.title }}"
+          SUMMARY="${{ github.event.inputs.summary }}"
+          TEXT="${{ github.event.inputs.text }}"
+          STARTED_AT="${{ github.event.inputs.started_at }}"
+          COMPLETED_AT="${{ github.event.inputs.completed_at }}"
 
           # Obtenir les check-runs existants
           RESPONSE=$(gh api -X GET -H "Accept: application/vnd.github+json" \
@@ -45,13 +69,18 @@ jobs:
             gh api -X PATCH -H "Accept: application/vnd.github+json" \
               -H "X-GitHub-Api-Version: 2022-11-28" \
               -f 'status=in_progress' \
+              -f "started_at=$STARTED_AT" \
               /repos/${{ github.repository }}/check-runs/$CHECK_RUN_ID
             echo "Check run updated to in_progress with ID: $CHECK_RUN_ID"
           elif [ "$STATUS" = "completed" ]; then
             gh api -X PATCH -H "Accept: application/vnd.github+json" \
               -H "X-GitHub-Api-Version: 2022-11-28" \
               -f 'status=completed' \
-              -f 'conclusion=success' \
+              -f 'conclusion=$CONCLUSION' \
+              -f 'output[title]=$TITLE' \
+              -f 'output[summary]=$SUMMARY' \
+              -f 'output[text]=$TEXT' \
+              -f "completed_at=$COMPLETED_AT" \
               /repos/${{ github.repository }}/check-runs/$CHECK_RUN_ID
             echo "Check run updated to completed with ID: $CHECK_RUN_ID"
           else
