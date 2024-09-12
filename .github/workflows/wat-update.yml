@@ -35,10 +35,12 @@ jobs:
           GH_TOKEN: ${{ github.token }}   
         run: |
           STATUS="${{ github.event.inputs.status }}"
-          echo "Requested status: $STATUS"
+          echo "Requested status HERE: $STATUS"
           
           CONCLUSION="${{ github.event.inputs.conclusion }}"
-          echo "Requested status: $CONCLUSION"
+          echo "Requested conclusion: $CONCLUSION"
+
+          
           TITLE="${{ github.event.inputs.title }}"
           SUMMARY="${{ github.event.inputs.summary }}"
           TEXT="${{ github.event.inputs.text }}"
